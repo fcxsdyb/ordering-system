@@ -7,15 +7,8 @@ import { useNavigate } from 'react-router-dom';
 const PlaceOrder = () => {
 
     const [data, setData] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        street: "",
-        city: "",
-        state: "",
-        zipcode: "",
-        country: "",
-        phone: ""
+        name: "",
+        email: ""
     })
 
     const { getTotalCartAmount, placeOrder } = useContext(StoreContext);
@@ -29,21 +22,25 @@ const PlaceOrder = () => {
     }
 
     useEffect(() => {
+        // Redirect if cart is empty
         if (getTotalCartAmount() === 0) {
-            navigate('/')
+            navigate('/');
         }
-    }, [])
+        // Load name and email from localStorage if available
+        const storedName = localStorage.getItem('name');
+        const storedEmail = localStorage.getItem('email');
+        if (storedName && storedEmail) {
+            setData({ name: storedName, email: storedEmail });
+        }
+    }, [navigate, getTotalCartAmount]);
+
 
     return (
         <div className='place-order'>
             <div className="place-order-left">
                 <p className='title'>User Information</p>
-                <div className="multi-field">
-                    <input type="text" name='firstName' onChange={onChangeHandler} value={data.firstName} placeholder='First name' />
-                    <input type="text" name='lastName' onChange={onChangeHandler} value={data.lastName} placeholder='Last name' />
-                </div>
+                <input type="name" name='name' onChange={onChangeHandler} value={data.name} placeholder='Name' />
                 <input type="email" name='email' onChange={onChangeHandler} value={data.email} placeholder='Email address' />
-                <input type="text" name='phone' onChange={onChangeHandler} value={data.phone} placeholder='Phone' />
             </div>
             <div className="place-order-right">
                 <div className="cart-total">

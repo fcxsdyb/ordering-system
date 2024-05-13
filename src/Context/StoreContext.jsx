@@ -1,11 +1,11 @@
 import { createContext, useEffect, useState } from "react";
-import { food_list, menu_list } from "../assets/assets";
+import { food_list } from "../assets/assets";
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
 
     const [cartItems, setCartItems] = useState({});
-    const [ordersData, setOrdersData] = useState({});
+    const [token, setToken] = useState(localStorage.getItem('token') || null);
 
     const addToCart = (itemId) => {
         if (!cartItems[itemId]) {
@@ -31,19 +31,14 @@ const StoreContextProvider = (props) => {
         return totalAmount;
     }
 
-    const placeOrder = (deliveryData) => {
-
-        console.log(deliveryData);
-    }
-
     const contextValue = {
         food_list,
-        menu_list,
         cartItems,
         addToCart,
         removeFromCart,
         getTotalCartAmount,
-        placeOrder
+        token,
+        setToken
     };
 
     return (
