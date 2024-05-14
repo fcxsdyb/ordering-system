@@ -43,7 +43,7 @@ export const assets = {
 export const food_list = [
     {
         food_id: 1,
-        food_name: "Greek salad",
+        food_name: "Greek Salad",
         food_image: food_1,
         food_price: 12,
         food_desc: "Food provides essential nutrients for overall health and well-being",
@@ -51,7 +51,7 @@ export const food_list = [
     },
     {
         food_id: 2,
-        food_name: "Veg salad",
+        food_name: "Veg Salad",
         food_image: food_2,
         food_price: 18,
         food_desc: "Food provides essential nutrients for overall health and well-being",
